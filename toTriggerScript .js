@@ -1,13 +1,9 @@
-window.toTriggerScript = function() {
+export default function() {
     var scripts = document.getElementsByTagName("script"),
-    arr = [];
+        arr = [];
     for (var i = 0; i < scripts.length; i++) {
         var src = scripts[i].src;
-        console.log('script:', src);
         if (!!src) {
-            if (src.indexOf('page_init') >= 0) {
-                continue
-            } //--禁止自身
             var script = document.createElement("script");
             script.defer = 'defer';
             script.type = "text/javascript";
@@ -36,7 +32,7 @@ window.toTriggerScript = function() {
             }
             script1.parentNode.insertBefore(script, script1); //--将克隆后的元素插入原元素之前
             script1.parentNode.removeChild(script1); //--删除原元素
-            if ( !! script.src) {
+            if (!!script.src) {
                 script.onload = function() {
                     console.log('onload:', script.src);
                     var next = arr[me.stept * 1 + 1];
